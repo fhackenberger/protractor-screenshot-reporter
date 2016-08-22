@@ -41,8 +41,8 @@ function defaultPathBuilder(spec, descriptions, results, capabilities) {
  */
 function structuredPathBuilder(spec, descriptions, results, capabilities) {
 	// Only the major browser version
-	var browserVersion = capabilities.caps_.version.substring(0, capabilities.caps_.version.indexOf('.') || capabilities.caps_.version.length);
-	var pathStr = capabilities.caps_.platform + path.sep + capabilities.caps_.browserName + path.sep + 
+	var browserVersion = capabilities.get('version').substring(0, capabilities.get('version').indexOf('.') || capabilities.get('version').length);
+	var pathStr = capabilities.get('platform') + path.sep + capabilities.get('browserName') + path.sep +
 			browserVersion + path.sep; + util.generateGuid();
 	var filename = descriptions.join('_');
 	return (pathStr + path.sep + filename).toLowerCase();
@@ -69,10 +69,10 @@ function defaultMetaDataBuilder(spec, descriptions, results, capabilities) {
 	var metaData = {
 			description: descriptions.reverse().join(' ')
 			, passed: results.passedExpectations
-			, os: capabilities.caps_.platform
+			, os: capabilities.get('platform')
 			, browser: {
-				name: capabilities.caps_.browserName
-				, version: capabilities.caps_.version
+				name: capabilities.get('browserName')
+				, version: capabilities.get('version')
 			}
 		};
 
